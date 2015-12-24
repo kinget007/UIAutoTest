@@ -45,9 +45,10 @@ public class AutoTestBase {
     protected static String date;
     protected static String time;
     protected static int timeout;
-    protected static String platformName;
-    protected static String udid;
-    protected static String browser_name;
+    protected static String appPackage;
+    public static String platformName;
+    public static String udid;
+    public static String browser_name;
 
     public WebDriver getDriver() {
         return driver;
@@ -62,8 +63,8 @@ public class AutoTestBase {
      * @param platformName    app平台 android/ios
      * @param platformVersion app运行平台的版本
      * @param deviceName      app设备名称,ios参数,例如:iPhone 6
-     * @param appPackage      app包名,android参数,例如:com.pingan.yzt
-     * @param appActivity     android参数,例如:com.pingan.yzt.SplashActivityPro
+     * @param appPackage      app包名,android参数,例如:com.xxxx.xxxx
+     * @param appActivity     android参数,例如:com.xxxx.xxxx
      * @param port            app的服务端口
      * @param udid            app的设备识别符
      * @param timeout         web/app等待超时的时间,单位:秒
@@ -78,6 +79,7 @@ public class AutoTestBase {
         AutoTestBase.platformName = platformName;
         AutoTestBase.udid = udid;
         AutoTestBase.browser_name = browser_name;
+        AutoTestBase.appPackage = appPackage;
 
         try {
             File dateFile = new File("date.txt");
@@ -139,7 +141,7 @@ public class AutoTestBase {
                 capabilities.setCapability("noSign", true);
 
                 try {
-                    if (Tools.isMatch(udid, miUdid)) {   //处理小米安装过程中的安全提示
+                    if (Tools.isMatch(udid, miUdid)) {
                         int tapx;
                         int tapy;
                         Map<String, String> miResolution = StaticConfig.getMiResolution();
@@ -247,10 +249,8 @@ public class AutoTestBase {
      */
     @AfterMethod(alwaysRun = true)
     public void afterMethod() {
-        if (platformName.toLowerCase().contains("android")) {
-            operateBase.backToHomePage(new String[]{""});
-        }else if (platformName.toLowerCase().contains("ios")){
-            operateBase.backToHomePage(new String[]{""});
+        if (platformName.toLowerCase().contains("android") || platformName.toLowerCase().contains("ios")) {
+            operateBase.backToHomePage();
         }
     }
 
@@ -261,7 +261,7 @@ public class AutoTestBase {
     @AfterSuite(alwaysRun = true)
     public void afterSuit() {
         if (platformName.toLowerCase().contains("android") || platformName.toLowerCase().contains("ios")) {
-            ((AppiumDriver) driver).removeApp("com.pingan.yizhangtong");
+            ((AppiumDriver) driver).removeApp(this.appPackage);
         }
         driver.quit();
     }
