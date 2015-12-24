@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="precodition">
+    <!--platformName in  {web ,android ,ios }-->
+    <parameter name="platformName" value="Android"/>
+    <!--APP PARAM-->
+    <parameter name="appName" value="xxxx.apk"/>
+    <parameter name="filePath" value="/path1/path2/"/>
+    <parameter name="platformVersion" value="5.1"/>
+    <parameter name="deviceName" value=""/>
+    <parameter name="appPackage" value="com.xxxx.xxxx"/>
+    <parameter name="appActivity" value="com.xxxx.xxxx.xxx"/>
+    <parameter name="port" value="5743"/>
+    <parameter name="timeout" value="30"/>
+    <parameter name="udid" value="udid"/>//adb devices 获取
+<!--WEB PARAM-->
+    <parameter name = "browser_name" value = "chrome"/>
+    <parameter name = "remote_url" value = ""/>
+
+
+    <test name="APP_Tests" preserve-order="true">
+        <groups>
+            <define name="p0">
+                <include name="p0"/>
+            </define>
+            <define name="p1">
+                <include name="p1"/>
+            </define>
+            <define name="p2">
+                <include name="p2"/>
+            </define>
+            <define name="p3">
+                <include name="p3"/>
+            </define>
+            <define name="p4">
+                <include name="p4"/>
+            </define>
+            <run>
+                <include name="p0"/>
+                <include name="p1"/>
+                <include name="p2"/>
+                <!--<include name="p3"/>-->
+                <!--<include name="p4"/>-->
+                <!--<exclude name="xxxx" />-->
+            </run>
+            <dependencies>
+                <group name="p1" depends-on="p0"></group>
+                <!-- name,depends-on均为参数为必须 -->
+                <group name="p2" depends-on="p0"></group>
+
+                <group name="p3" depends-on="p0"></group>
+                <group name="p4" depends-on="p0"></group>
+            </dependencies>
+        </groups>
+        <classes>
+            <parameter name="example" value="example"/>
+            <class name="com.xxxx.uiautotest.testsuits.testcases.app.Example_Tests"/>
+        </classes>
+    </test>
+
+    <listeners>
+        <listener class-name="com.xxxx.uiautotest.util.testng.TestResultListener"/>
+        <listener class-name="com.xxxx.uiautotest.util.testng.RetryListener"/>
+    </listeners>
+</suite>

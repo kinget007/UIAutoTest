@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Report</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet" /> 
+        <link href="css/bootstrap.css" rel="stylesheet" /> 
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script> 
+		<script type="text/javascript">
+$(function () {
+        var pass_data=[[1446422400000,121.18],[1446508800000,122.57],[1446595200000,122.00],[1446681600000,120.92],[1446768000000,121.06],[1447027200000,120.57],[1447113600000,116.77]];
+var failure_data=[[1446422400000,21.18],[1446508800000,22.57],[1446595200000,22.00],[1446681600000,20.92],[1446768000000,21.06],[1447027200000,20.57],[1447113600000,16.77]];
+var skipped_data=[[1446422400000,51.18],[1446508800000,52.57],[1446595200000,52.00],[1446681600000,50.92],[1446768000000,51.06],[1447027200000,50.57],[1447113600000,16.77]];
+var total_data=[[1446422400000,61.18],[1446508800000,92.57],[1446595200000,12.00],[1446681600000,20.92],[1446768000000,21.06],[1447027200000,20.57],[1447113600000,86.77]];
+        $('#details').highcharts('StockChart', {
+            rangeSelector : {
+                selected : 1
+            },
+
+            title : {
+                text : 'Overview Trend'
+            },
+
+            series : [{
+                name : 'pass',
+                data : pass_data,
+                tooltip: {
+                    valueDecimals: 2
+                }
+            },{
+                name : 'failure',
+                data : failure_data,
+                tooltip: {
+                    valueDecimals: 2
+                }
+            },{
+                name : 'skipped',
+                data : skipped_data,
+                tooltip: {
+                    valueDecimals: 2
+                }
+            },{
+                name : 'total',
+                data : total_data,
+                tooltip: {
+                    valueDecimals: 2
+                }
+            }]
+        });
+
+
+    // });
+
+
+    $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Devices Distribution'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>(nums:<b>{point.y})</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: "Brands",
+                colorByPoint: true,
+                data: [{
+                    name: "Android",
+                    y: 5
+                }, {
+                    name: "IOS",
+                    y: 10,
+                    sliced: true,
+                    selected: true
+                }]
+            }]
+        });
+
+});
+
+		</script>
+	</head>
+	<body>
+<script src="js/highstock.js"></script>
+<script src="js/exporting.js"></script>
+<script src="js/highcharts.js"></script>
+<script src="js/angular.js"></script>
+
+<body> 
+  <div class="row clearfix"> 
+   <div class="col-md-12 column"> 
+    <div class="panel panel-default"> 
+     <div class="panel-heading"> 
+      <table width="100%"> <tbody><tr><td><h3 class="panel-title">Report</h3></td></tr></tbody></table> 
+     </div> 
+     <div class="panel-body"> 
+      <div class="row clearfix"> 
+       <div class="col-md-8 column"> 
+        <div id="details" style="height: 400px; min-width: 310px"></div>
+       </div> 
+       <div class="col-md-4 column"> 
+        <div ng-app="reportAPP" ng-controller="selectCtrl">
+            <select class="form-control" ng-model="deviceSelect"
+              ng-options="device.deviceName for device in devices| orderBy:'deviceName'"  ng-change="change(deviceSelect)">
+        <option value="">选择设备查看详情</option>
+      </select>
+        </div>
+        <script>
+var app = angular.module('reportAPP', []);
+app.controller('selectCtrl', function($scope) {
+    $scope.devices = [{"deviceName":"三星s5","udid":"12345678","url":"file:///Users/apple/Desktop/app_ui_report/report/test.html"},{"deviceName":"三星s6", "udid":"8654321","url":"http://www.baidu.com"}];
+    $scope.change = function(device){
+        window.open(device.url);
+
+  }
+});
+</script>
+  
+        <div id="container" style="min-width: 300px; height: 400px; max-width: 300px; margin: 0 auto"></div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+ </body>
+</html>

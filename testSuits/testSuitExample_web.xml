@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="precodition">
+    <parameter name="timeout" value="30"/>
+    <!--platformName in  {web ,android ,ios }-->
+    <parameter name="platformName" value="web"/>
+    <!--APP PARAM-->
+    <parameter name="appName" value=""/>
+    <parameter name="filePath" value=""/>
+    <parameter name="platformVersion" value=""/>
+    <parameter name="deviceName" value=""/>
+    <parameter name="appPackage" value=""/>
+    <parameter name="appActivity" value=""/>
+    <parameter name="port" value=""/>
+    <parameter name="udid" value=""/>
+    <!--WEB PARAM-->
+    <parameter name = "browser_name" value = "chrome"/>
+    <parameter name = "remote_url" value = ""/>
+
+    <test name="Web_Tests">
+        <groups>
+            <define name="p0">
+                <include name="p0" />
+            </define>
+            <define name="p1">
+                <include name="p1" />
+            </define>
+            <define name="p2">
+                <include name="p2" />
+            </define>
+            <run>
+                <include name="p0" />
+                <!--<exclude name="xxxx" />-->
+            </run>
+        </groups>
+        <classes>
+            <class name="com.xxxx.uiautotest.testsuits.testcases.web.testExamlpe"/>
+        </classes>
+    </test>
+
+    <listeners>
+        <listener class-name="com.xxxx.uiautotest.util.testng.TestResultListener" />
+        <listener class-name="com.xxxx.uiautotest.util.testng.RetryListener" />
+    </listeners>
+</suite>

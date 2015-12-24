@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="precodition">
+    <parameter name = "appName" value = "PANewToapAPP.app"/>
+    <!--<parameter name = "appName" value = "PANewToapAPP_EVN1.app"/>-->
+
+    <parameter name = "filePath" value = "/path1/path2/"/>
+    <parameter name = "platformName" value = "iOS"/>
+    <parameter name = "platformVersion" value = "8.4"/>
+    <parameter name = "deviceName" value = "iPhone 6"/>
+    <parameter name = "appPackage" value = ""/>
+    <parameter name = "appActivity" value = ""/>
+    <parameter name = "port" value = "5743"/>
+    <!--<parameter name = "udid" value = ""/>-->
+    <parameter name = "udid" value = "id"/>
+    <parameter name = "timeout" value = "30"/>
+
+
+    <test name="APP_Tests" preserve-order="true">
+        <groups>
+            <define name="p0">
+                <include name="p0"/>
+            </define>
+            <define name="p1">
+                <include name="p1"/>
+            </define>
+            <define name="p2">
+                <include name="p2"/>
+            </define>
+            <define name="p3">
+                <include name="p3"/>
+            </define>
+            <define name="p4">
+                <include name="p4"/>
+            </define>
+            <run>
+                <include name="p0"/>
+                <include name="p1"/>
+                <!--<include name="p2"/>-->
+                <!--<include name="p3"/>-->
+                <!--<include name="p4"/>-->
+                <!--<exclude name="xxxx" />-->
+            </run>
+            <dependencies>
+                <group name="p1" depends-on="p0"></group>
+                <!-- name,depends-on均为参数为必须 -->
+                <group name="p2" depends-on="p0"></group>
+
+                <group name="p3" depends-on="p0"></group>
+                <group name="p4" depends-on="p0"></group>
+            </dependencies>
+        </groups>
+        <classes>
+
+            <parameter name="example" value="example"/>
+            <class name="com.xxxx.uiautotest.testsuits.testcases.app.Example_Tests"/>
+
+        </classes>
+    </test>
+
+    <listeners>
+        <listener class-name="com.xxxx.autotest.testng.TestResultListener" />
+        <listener class-name="com.xxxx.autotest.testng.RetryListener" />
+    </listeners>
+</suite>

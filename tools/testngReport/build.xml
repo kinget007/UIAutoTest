@@ -1,0 +1,24 @@
+<project name="UIAutoTest" basedir=".">
+    <property name="lib.dir" value="../../lib"/>
+    <property name="in" value="${in}" />
+    <property name="out" value="${out}" />    
+    <property name="expression" value="${expression}" />
+
+
+    <path id="test.classpath">
+         <!-- adding the saxon jar to your classpath -->
+        <fileset dir="${lib.dir}" includes="saxon-8.7.jar"/>
+    </path>
+
+    <target name="transform">
+        <!-- <xslt in="../../output/testngReports/testng-results.xml" style="testng-results.xsl"
+              out="../../output/testngReports/index_xslt.html"> -->
+        <xslt in="${in}" style="testng-results.xsl"
+              out="${out}">
+             <!-- you need to specify the directory here again -->
+            <!-- <param name="testNgXslt.outputDir" expression="/Users/apple/.jenkins/workspace/UIAutoTest/output/testngReports/"/> -->
+            <param name="testNgXslt.outputDir" expression="${expression}"/>
+            <classpath refid="test.classpath"/>
+        </xslt>
+    </target>
+</project>
